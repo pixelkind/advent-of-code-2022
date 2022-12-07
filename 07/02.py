@@ -1,5 +1,3 @@
-# Find all of the directories with a total size of at most 100000. What is the sum of the total sizes of those directories?
-
 from dataclasses import dataclass
 
 @dataclass
@@ -60,13 +58,19 @@ for line in lines:
 
 print(root.size())
 
-total_size = 0
+# 70000000
+# 30000000
+
+size_needed = abs(70000000 - 30000000 - root.size())
+print(size_needed)
+
+directory_sizes = []
 
 def check_size(dir):
-  global total_size
+  global directory_sizes
   size = dir.size()
-  if size <= 100000:
-    total_size += size
+  if size >= size_needed:
+    directory_sizes.append(size)
 
 def check_dir(directory):
   for dir in directory.directories:
@@ -76,4 +80,4 @@ def check_dir(directory):
 check_size(root)
 check_dir(root)
 
-print(total_size)
+print(min(directory_sizes))
