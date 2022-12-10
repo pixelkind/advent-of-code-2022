@@ -30,15 +30,15 @@ def move_tail(index):
   tail_y = position[index][1]
   dist_x = abs(head_x - tail_x)
   dist_y = abs(head_y - tail_y)
-  if dist_x > 1 and dist_y == 1:
+  if dist_x > 1 and dist_y >= 1:
     tail_x = move_tail_x(head_x, tail_x)
     tail_y = move_tail_y(head_y, tail_y)
-  elif dist_y > 1 and dist_x == 1:
+  elif dist_y > 1 and dist_x >= 1:
     tail_x = move_tail_x(head_x, tail_x)
     tail_y = move_tail_y(head_y, tail_y)
   elif dist_x > 1 and dist_y == 0:
     tail_x = move_tail_x(head_x, tail_x)
-  if dist_y > 1 and dist_x == 0:
+  elif dist_y > 1 and dist_x == 0:
     tail_y = move_tail_y(head_y, tail_y)
 
   if index == len(position)-1:
@@ -51,6 +51,7 @@ def move_tail(index):
 for line in lines:
   components = line.split(' ')
   moves = int(components[1])
+  print(moves)
   head_x = position[0][0]
   head_y = position[0][1]
   if components[0] == 'R':
@@ -73,6 +74,8 @@ for line in lines:
       head_y += 1
       position[0] = (head_x, head_y)
       move_tail(1)
+
+  print(position)
 
 print(len(tail_positions))
 print(len(set(tail_positions)))
